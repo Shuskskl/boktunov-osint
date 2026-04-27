@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>boktunov‑osint · OSINT инструменты</title>
+  <link rel="stylesheet" href="style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>🕵️ boktunov‑osint</h1>
+      <p>Анализ открытых источников — проверка утечек, username, паролей и телефонов</p>
+    </header>
+
+    <div class="cards-grid">
+      <!-- Карточка Email -->
+      <div class="card">
+        <div class="card-icon">📧</div>
+        <h2>Email breach check</h2>
+        <p>Узнайте, был ли ваш email скомпрометирован (Have I Been Pwned)</p>
+        <input type="email" id="emailInput" placeholder="example@domain.com">
+        <button id="checkEmailBtn">Проверить</button>
+        <div class="result" id="emailResult"></div>
+      </div>
+
+      <!-- Карточка Username -->
+      <div class="card">
+        <div class="card-icon">👤</div>
+        <h2>Username search</h2>
+        <p>Проверка наличия профиля на GitHub и Reddit</p>
+        <input type="text" id="usernameInput" placeholder="username">
+        <button id="checkUsernameBtn">Поиск</button>
+        <div class="result" id="usernameResult"></div>
+      </div>
+
+      <!-- Карточка Password -->
+      <div class="card">
+        <div class="card-icon">🔑</div>
+        <h2>Password breach check</h2>
+        <p>Проверка пароля по базе Pwned Passwords (без отправки самого пароля)</p>
+        <input type="password" id="passwordInput" placeholder="••••••••">
+        <button id="checkPasswordBtn">Проверить пароль</button>
+        <div class="result" id="passwordResult"></div>
+      </div>
+
+      <!-- Карточка Phone -->
+      <div class="card">
+        <div class="card-icon">📱</div>
+        <h2>Phone‑number check</h2>
+        <p>Демо-анализ номера (для реальной работы подключите коммерческое API)</p>
+        <input type="tel" id="phoneInput" placeholder="+7 XXX XXX-XX-XX">
+        <button id="checkPhoneBtn">Анализировать</button>
+        <div class="result" id="phoneResult"></div>
+      </div>
+    </div>
+
+    <footer>
+      <p>🔒 Все проверки выполняются через бэкенд — ваши данные не сохраняются. Для продакшена используйте собственные API‑ключи.</p>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
