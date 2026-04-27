@@ -93,21 +93,31 @@ app.get('/api/password-breach', async (req, res) => {
   }
 });
 
-// ==================== 4. ДЕМО-ПРОВЕРКА ТЕЛЕФОНА ====================
-app.get('/api/phone-check', (req, res) => {
+// ==================== 4. РЕАЛЬНАЯ ПРОВЕРКА ТЕЛЕФОНА (Numverify) ====================
+app.get('/api/phone-check', async (req, res) => {
   const { phone } = req.query;
   if (!phone) {
     return res.status(400).json({ error: 'Phone required' });
   }
 
-  // Демо-ответ. Для реальной работы подключите платное API (Twilio, Numverify и т.д.)
-  res.json({
-    demo: true,
-    message: 'Это демонстрационная функция. В реальном OSINT потребуется API оператора или коммерческий сервис.',
-    phone: phone,
-    possible_carrier: 'Demo: "Mobile"',
-    risk: 'low'
-  });
+  try {
+    const YOUR_API_KEY = 'ВСТАВЬТЕ_ВАШ_КЛЮЧ_ЗДЕСЬ';
+    const response = await axios.get(`http://apilayer.net/api/validate?access_key=${YOUR_API_KEY}&number=${encodeURIComponent(phone)}`);
+    
+    res.json({
+      valid: response.data.valid,
+      number: response.data.number,
+      country: response.data.country_name,
+      carrier: response.data.carrier,
+      line_type: response.data.line_type,
+      location: response.data.location
+    });
+  } catch (error) {
+    console.error('Phone API error:', error.message);
+    res.status(500).json({ error: 'Phone check failed', demo: false });
+  }
+});
+
 });
 
 // ==================== ЗАПУСК СЕРВЕРА ====================
